@@ -18,11 +18,14 @@ for n=0:0.0001:2
     [J0]=getJ0( el,SBH_V,D0,tau,kT );%keep in mind it is current density, since unit area, it is equal to I0
     k=k+1;
     J=J0*(exp(el*n/kT)-1)-Ip;
+    
+% J01 is the sum of the tunneling current through the barrier and the thermionic current over the barrier    
     J01 = (((el)*As*(T^2))*(pi*E00*(SBH-n-Vn))^0.5)/kT;
   J01= J01/cosh(((el)*E00)/kT);
   J01 = J01*exp((-SBH/E0)+Vn*((1/E0)-(el/kT)));
   J01 = J01*exp(n/E0)*(1-exp(-(el*n)/kT));
   Recom(k) = J-J01;
+  
     P(k)=J*n;
 end
 [a,b]= min(P);
